@@ -2158,3 +2158,72 @@ In our companion methods paper, we describe our procedure for pruning attributio
     Radhakrishnan, A., Nguyen, K., Chen, A., Chen, C., Denison, C., Hernandez, D., Durmus, E., Hubinger, E., Kernion, J. and others,, 2023. arXiv preprint arXiv:2307.11768.
 
 § 1 Introduction§ 2 Method Overview§ 3 Multi-step Reasoning§ 4 Planning in Poems§ 5 Multilingual Circuits§ 6 Addition§ 7 Medical Diagnoses§ 8 Hallucinations§ 9 Refusals§ 10 Life of a Jailbreak§ 11 Chain-of-thought Faithfulness§ 12 Uncovering Hidden Goals§ 13 Common Components§ 14 Limitations§ 15 Discussion§ 16 Related WorkAppendix
+
+## Image Descriptions
+
+### screenshot.png
+
+The image is a detailed overview of a research project titled *"On the Biology of a Large Language Model,"* which investigates various internal mechanisms of the Claude 3.5 Haiku model (an AI language production model created by Anthropic) through circuit tracing methodology. The content is laid out in a structured format, broken into distinct sections with diagrammatic representations. Each section explores different aspects of the language model’s behavior, functioning, and limitations in specific scenarios. Here's a breakdown:
+
+---
+
+### **Title and Description**
+- **Title**: "On the Biology of a Large Language Model."
+- **Subtitle**: It states the purpose of the study—to investigate the internal mechanisms of the language model across different contexts using circuit tracing.
+- **Model Focus**: Claude 3.5 Haiku, a "lightweight production model" by Anthropic.
+
+---
+
+### **Sections and Illustrations**
+The image contains a grid of box-like sections, each with a title, an illustration, and a brief focus. The sections cover diverse topics related to AI behavior:
+
+1. **Introductory Example: Multi-Step Reasoning**
+   - Diagram illustrating hierarchical reasoning steps with labels like "say Austin," "say capital," "state," and "Dallas."
+
+2. **Planning in Poems**
+   - Conceptual diagram showing connections between words such as "rabbit," "habit," and arrows indicating "rhymes with 'it.'"
+
+3. **Multilingual Circuits**
+   - Visual representation with terms like "say large multilingual" and "quote Chinese," exploring multilingual translation mechanisms.
+
+4. **Addition**
+   - Graphic resembling a grid-like pattern, likely visualizing how the model performs arithmetic operations such as addition.
+
+5. **Medical Diagnoses**
+   - Tree structure diagram mapping terms like "visual deficits," "preeclampsia," and "pregnancy," simulating diagnostic decision-making.
+
+6. **Entity Recognition and Hallucinations**
+   - Focused on recognizing entities (e.g., "Michael Jordan"), separating known answers from unknown names, and mapping hallucination pathways.
+
+7. **Refusals**
+   - Examines how the model handles harmful requests and refusal mechanisms, showing connections such as "harmful request," "refusal," and "dangers of bleach+ammonia."
+
+8. **Life of a Jailbreak**
+   - Representation of "BOMB" broken into its letters with a focus on "first letter," possibly investigating bypassing safety protocols.
+
+9. **Chain-of-thought Faithfulness**
+   - An example showing multi-step breakdown of reasoning with human-to-model interactions, including expressions like "floor(5.243232)."
+
+10. **Uncovering Hidden Goals in a Misaligned Model**
+    - Complex, dense diagrams visualizing reward models, biases, and misalignment components aimed at revealing hidden objectives.
+
+11. **Commonly Observed Circuit Components and Structure**
+    - Detailed interconnected components and circuits that make up the model’s network, showing how it processes information in structured pathways.
+
+12. **Limitations**
+    - Representation of specific model architecture features like "Last token was Aunt," exploring an "Induction Head" and "Previous Token Head."
+
+---
+
+### **Authors and Affiliations**
+- **Authors**: Collaborators listed include Jack Lindsey, Wes Gurnee, Emmanuel Amiesen, Brian Chen, Adam Pearce, etc.
+- **Affiliations**: Anthropic, the organization responsible for the research and model development.
+- **Publication Date**: March 27, 2025.
+
+---
+
+### **Overall Layout**
+The page is clean and minimalistic, with a focus on well-structured information. Each section is equally divided into clear blocks with a combination of illustrations and annotations, providing a comprehensive view of the study into AI mechanisms.
+
+--------------------------------------------------
+
