@@ -23,8 +23,8 @@ def retriever(markdown_path:Path, directory: Path, collection_name: str) -> obje
 
     pages_split = text_splitter.split_documents(docs) 
 
-    persist_directory = r"R:/TAZMIC/artifacts/Vector_databases/biology"
-    collection_name = "biology"
+    persist_directory = f"R:/TAZMIC/artifacts/Vector_databases/{collection_name}"
+    collection_name = collection_name
 
     if not os.path.exists(persist_directory):
         os.makedirs(persist_directory)
@@ -41,7 +41,6 @@ def retriever(markdown_path:Path, directory: Path, collection_name: str) -> obje
     except Exception as e:
         print(f"Error setting up ChromaDB: {str(e)}")
         raise
-
 
     # Now we create our retriever 
     retriever = vectorstore.as_retriever(
