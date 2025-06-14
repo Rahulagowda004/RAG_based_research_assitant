@@ -1,0 +1,30 @@
+{
+  "url": "https://transformer-circuits.pub/2025/attribution-graphs/biology.html",
+  "scraped_at": "2025-06-14T15:46:15.817891",
+  "metadata": {
+    "ogTitle": "On the Biology of a Large Language Model",
+    "twitter:card": "summary_large_image",
+    "viewport": [
+      "width=device-width, initial-scale=1",
+      "width=device-width, initial-scale=1"
+    ],
+    "og:site_name": "Transformer Circuits",
+    "ogDescription": "We investigate the internal mechanisms used by Claude 3.5 Haiku \u2014 Anthropic's lightweight production model \u2014 in a variety of contexts, using our circuit tracing methodology.",
+    "title": "On the Biology of a Large Language Model",
+    "og:title": "On the Biology of a Large Language Model",
+    "language": "en",
+    "og:image": "https://transformer-circuits.pub/2025/attribution-graphs/png/biology.png",
+    "ogSiteName": "Transformer Circuits",
+    "ogImage": "https://transformer-circuits.pub/2025/attribution-graphs/png/biology.png",
+    "og:description": "We investigate the internal mechanisms used by Claude 3.5 Haiku \u2014 Anthropic's lightweight production model \u2014 in a variety of contexts, using our circuit tracing methodology.",
+    "scrapeId": "6c643a80-67df-4a68-a7fd-911d500271fb",
+    "sourceURL": "https://transformer-circuits.pub/2025/attribution-graphs/biology.html",
+    "url": "https://transformer-circuits.pub/2025/attribution-graphs/biology.html",
+    "statusCode": 200,
+    "contentType": "text/html",
+    "proxyUsed": "basic"
+  },
+  "total_links": 211,
+  "has_screenshot": true,
+  "screenshot_type": "url"
+}

@@ -1,58 +1,86 @@
-import asyncio
-from typing import List # This can be removed if not used elsewhere
-from crawl4ai import AsyncWebCrawler, BrowserConfig, CrawlerRunConfig
-from crawl4ai.markdown_generation_strategy import DefaultMarkdownGenerator
-# requests and xml.etree.ElementTree are no longer needed for this version
-# import requests
-# from xml.etree import ElementTree
-import re, os # Moved imports to the top
+from firecrawl import FirecrawlApp
+from dotenv import load_dotenv
+import os
+import base64
+import json
+from datetime import datetime
+import requests
 
-async def crawl_single_url(url: str): # Renamed and changed parameter
-    print(f"\n=== Crawling Single URL: {url} ===")
+load_dotenv()
 
-    browser_config = BrowserConfig(
-        headless=True,
-        extra_args=["--disable-gpu", "--disable-dev-shm-usage", "--no-sandbox"],
-    )
+app = FirecrawlApp(api_key=os.getenv('firecrawl_api_key'))
 
-    crawl_config = CrawlerRunConfig(
-        markdown_generator=DefaultMarkdownGenerator()
-    )
+result = app.scrape_url(
+    'https://transformer-circuits.pub/2025/attribution-graphs/biology.html',
+    formats=['markdown', 'screenshot', 'links']
+)
 
-    crawler = AsyncWebCrawler(config=browser_config)
-    await crawler.start()
+timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+output_dir = f"scraped_data_{timestamp}"
+os.makedirs(output_dir, exist_ok=True)
 
+with open(f"{output_dir}/content.md", 'w', encoding='utf-8') as f:
+    f.write(result.markdown)
+
+if hasattr(result, 'screenshot') and result.screenshot:
     try:
-        session_id = "session1" # You can keep or remove session_id if only one URL
-        result = await crawler.arun(
-            url=url,
-            config=crawl_config,
-            session_id=session_id
-        )
-        if result.success:
-            print(f"Successfully crawled: {url}")
-            safe_filename = re.sub(r'[^a-zA-Z0-9_-]', '_', url.replace('https://', '').replace('http://', ''))
-            output_dir = "scraped_markdown"
-            os.makedirs(output_dir, exist_ok=True)
-            file_path = os.path.join(output_dir, f"{safe_filename}.md")
-            with open(file_path, "w", encoding="utf-8") as f:
-                f.write(result.markdown.raw_markdown)
-            print(f"Saved markdown to {file_path}")
+        screenshot_data = result.screenshot
+        
+        if screenshot_data.startswith('http'):
+            print(f"Downloading screenshot from: {screenshot_data}")
+            response = requests.get(screenshot_data)
+            response.raise_for_status()
+            
+            with open(f"{output_dir}/screenshot.png", 'wb') as f:
+                f.write(response.content)
+            print("Screenshot downloaded and saved successfully")
+            
+        elif screenshot_data.startswith('data:image'):
+            screenshot_data = screenshot_data.split(',')[1]
+            
+            def fix_base64_padding(data):
+                missing_padding = len(data) % 4
+                if missing_padding:
+                    data += '=' * (4 - missing_padding)
+                return data
+            
+            screenshot_data = fix_base64_padding(screenshot_data)
+            
+            with open(f"{output_dir}/screenshot.png", 'wb') as f:
+                f.write(base64.b64decode(screenshot_data))
+            print("Screenshot decoded and saved successfully")
         else:
-            print(f"Failed: {url} - Error: {result.error_message}")
-    finally:
-        await crawler.close()
+            print(f"Unknown screenshot format: {screenshot_data[:50]}...")
+            
+    except Exception as e:
+        print(f"Error saving screenshot: {e}")
+        with open(f"{output_dir}/screenshot_debug.txt", 'w') as f:
+            f.write(f"Screenshot data length: {len(result.screenshot)}\n")
+            f.write(f"First 100 chars: {result.screenshot[:100]}\n")
+            f.write(f"Raw data: {result.screenshot}")
+else:
+    print("No screenshot data available")
 
-# Removed get_pydantic_ai_docs_urls function
+if hasattr(result, 'links') and result.links:
+    with open(f"{output_dir}/links.json", 'w', encoding='utf-8') as f:
+        json.dump(result.links, f, indent=2)
+    print(f"Saved {len(result.links)} links")
+else:
+    print("No links data available")
 
-async def main():
-    # Define the single URL you want to crawl
-    target_url = "https://en.wikipedia.org/wiki/Attention_Is_All_You_Need" # Replace with your desired URL
-    if target_url:
-        print(f"Attempting to crawl: {target_url}")
-        await crawl_single_url(target_url) # Call the modified function
-    else:
-        print("No URL provided to crawl")
+metadata = {
+    'url': 'https://transformer-circuits.pub/2025/attribution-graphs/biology.html',
+    'scraped_at': datetime.now().isoformat(),
+    'metadata': result.metadata if hasattr(result, 'metadata') else {},
+    'total_links': len(result.links) if hasattr(result, 'links') and result.links else 0,
+    'has_screenshot': hasattr(result, 'screenshot') and bool(result.screenshot),
+    'screenshot_type': 'url' if (hasattr(result, 'screenshot') and result.screenshot and result.screenshot.startswith('http')) else 'base64' if (hasattr(result, 'screenshot') and result.screenshot and result.screenshot.startswith('data:')) else 'unknown'
+}
 
-if __name__ == "__main__":
-    asyncio.run(main())
+with open(f"{output_dir}/metadata.json", 'w', encoding='utf-8') as f:
+    json.dump(metadata, f, indent=2)
+
+print(f"Data saved to directory: {output_dir}")
+print(f"Content size: {len(result.markdown)} characters")
+print(f"Links found: {len(result.links) if hasattr(result, 'links') and result.links else 0}")
+print(f"Screenshot: {'Available' if hasattr(result, 'screenshot') and result.screenshot else 'Not available'}")
