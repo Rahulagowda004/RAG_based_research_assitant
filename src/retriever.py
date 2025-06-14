@@ -28,3 +28,25 @@ def retriever(markdown_path:Path, directory: Path, collection_name: str):
 
     if not os.path.exists(persist_directory):
         os.makedirs(persist_directory)
+        
+    try:
+        vectorstore = Chroma.from_documents(
+            documents=pages_split,
+            embedding=embedding_model,
+            persist_directory=persist_directory,
+            collection_name=collection_name
+        )
+        print(f"Created ChromaDB vector store!")
+        
+    except Exception as e:
+        print(f"Error setting up ChromaDB: {str(e)}")
+        raise
+
+
+    # Now we create our retriever 
+    retriever = vectorstore.as_retriever(
+        search_type="similarity",
+        search_kwargs={"k": 20}
+    )
+    
+    return retriever
