@@ -3,10 +3,10 @@ import base64
 from pathlib import Path
 from model import llm
 
-def get_image_info(image_path: Path) -> dict:
+def get_image_info(directory: Path) -> dict:
     try:
-        content_file = image_path.parent / "content.md"
-        png_files = [file for file in os.listdir(image_path.parent) if file.endswith(".png")]
+        content_file = directory / "content.md"
+        png_files = [file for file in os.listdir(directory) if file.endswith(".png")]
 
         if not png_files:
             print("No PNG files found in the directory")
@@ -16,7 +16,7 @@ def get_image_info(image_path: Path) -> dict:
                 md_file.write("\n\n## Image Descriptions\n\n")
                 
                 for file in png_files:
-                    file_path = Path(image_path.parent, file)
+                    file_path = Path(directory, file)
                     print(f"Found: {file_path}")
                     
                     if file_path.exists():

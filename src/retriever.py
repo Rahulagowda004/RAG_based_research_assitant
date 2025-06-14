@@ -4,16 +4,20 @@ from langchain.text_splitter import RecursiveCharacterTextSplitter
 from model import llm, embedding_model
 from langchain_chroma import Chroma
 from pathlib import Path
+from image_info import get_image_info  
 import os
 
 def retriever(markdown_path:Path, directory: Path, collection_name: str) -> object:
     """Function to retrieve and process documents from a markdown file, split them into chunks, and store them in a vector database."""
+
+    get_image_info(directory)
+
     loader = UnstructuredMarkdownLoader(
-        "R:/TAZMIC/artifacts/research_papers/biology/content.md",
+        markdown_path,
         mode="single",
         strategy="fast",
     )
-
+    
     docs = loader.load()
 
     text_splitter = RecursiveCharacterTextSplitter(
