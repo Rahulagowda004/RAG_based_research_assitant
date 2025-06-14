@@ -6,7 +6,7 @@ from langchain_chroma import Chroma
 from pathlib import Path
 import os
 
-def retriever(markdown_path:Path, directory: Path, collection_name: str):
+def retriever(markdown_path:Path, directory: Path, collection_name: str) -> object:
     """Function to retrieve and process documents from a markdown file, split them into chunks, and store them in a vector database."""
     loader = UnstructuredMarkdownLoader(
         "R:/TAZMIC/artifacts/research_papers/biology/content.md",
