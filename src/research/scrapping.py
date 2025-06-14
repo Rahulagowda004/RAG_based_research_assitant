@@ -61,25 +61,6 @@ if hasattr(result, 'screenshot') and result.screenshot:
 else:
     print("No screenshot data available")
 
-if hasattr(result, 'links') and result.links:
-    with open(f"{output_dir}/links.json", 'w', encoding='utf-8') as f:
-        json.dump(result.links, f, indent=2)
-    print(f"Saved {len(result.links)} links")
-else:
-    print("No links data available")
-
-metadata = {
-    'url': 'https://transformer-circuits.pub/2025/attribution-graphs/biology.html',
-    'scraped_at': datetime.now().isoformat(),
-    'metadata': result.metadata if hasattr(result, 'metadata') else {},
-    'total_links': len(result.links) if hasattr(result, 'links') and result.links else 0,
-    'has_screenshot': hasattr(result, 'screenshot') and bool(result.screenshot),
-    'screenshot_type': 'url' if (hasattr(result, 'screenshot') and result.screenshot and result.screenshot.startswith('http')) else 'base64' if (hasattr(result, 'screenshot') and result.screenshot and result.screenshot.startswith('data:')) else 'unknown'
-}
-
-with open(f"{output_dir}/metadata.json", 'w', encoding='utf-8') as f:
-    json.dump(metadata, f, indent=2)
-
 print(f"Data saved to directory: {output_dir}")
 print(f"Content size: {len(result.markdown)} characters")
 print(f"Links found: {len(result.links) if hasattr(result, 'links') and result.links else 0}")
