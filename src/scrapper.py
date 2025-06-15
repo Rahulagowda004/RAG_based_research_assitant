@@ -4,10 +4,40 @@ import os
 import base64
 from datetime import datetime
 import requests
+from pathlib import Path
+from urllib.parse import urlparse
 
 load_dotenv()
 
-def scrape_url(url, output_dir=None):
+def extract_page_identifier(url: str) -> str:
+    """
+    Extract the page identifier from transformer-circuits.pub URLs.
+    
+    Args:
+        url: URL like 'https://transformer-circuits.pub/2025/attribution-graphs/biology.html'
+    
+    Returns:
+        str: The page identifier (e.g., 'biology')
+    """
+    try:
+        # Parse the URL to get the path
+        parsed_url = urlparse(url)
+        path = parsed_url.path
+        
+        # Extract filename from path
+        filename = Path(path).name
+        
+        # Remove .html extension if present
+        if filename.endswith('.html'):
+            filename = filename[:-5]
+        
+        return filename
+    
+    except Exception as e:
+        timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+        return timestamp
+
+def scrape_url(url, output_dir=r"R:\TAZMIC\artifacts\research_papers"):
     app = FirecrawlApp(api_key=os.getenv('firecrawl_api_key'))
 
     result = app.scrape_url(
@@ -15,8 +45,10 @@ def scrape_url(url, output_dir=None):
         formats=['markdown', 'screenshot', 'links']
     )
 
-    timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
-    output_dir = f"artifacts/scraped_data_{timestamp}"
+    page_identifier = extract_page_identifier(url)
+    
+    output_dir = f"{output_dir}/{page_identifier}"
+    
     os.makedirs(output_dir, exist_ok=True)
 
     with open(f"{output_dir}/content.md", 'w', encoding='utf-8') as f:
@@ -65,3 +97,5 @@ def scrape_url(url, output_dir=None):
     print(f"Content size: {len(result.markdown)} characters")
     print(f"Links found: {len(result.links) if hasattr(result, 'links') and result.links else 0}")
     print(f"Screenshot: {'Available' if hasattr(result, 'screenshot') and result.screenshot else 'Not available'}")
+    
+    return output_dir, page_identifier

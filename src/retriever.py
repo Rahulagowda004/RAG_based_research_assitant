@@ -7,7 +7,7 @@ from pathlib import Path
 from image_info import get_image_info  
 import os
 
-def retriever(markdown_path:Path, directory: Path, collection_name: str) -> object:
+def retriever(markdown_path: Path, collection_name: str, directory: Path = Path(r"R:\TAZMIC\artifacts\Vector_databases")) -> object:
     """Function to retrieve and process documents from a markdown file, split them into chunks, and store them in a vector database."""
 
     get_image_info(directory)
@@ -27,7 +27,7 @@ def retriever(markdown_path:Path, directory: Path, collection_name: str) -> obje
 
     pages_split = text_splitter.split_documents(docs) 
 
-    persist_directory = f"R:/TAZMIC/artifacts/Vector_databases/{collection_name}"
+    persist_directory = Path(directory) / collection_name
     collection_name = collection_name
 
     if not os.path.exists(persist_directory):
