@@ -24,9 +24,9 @@ CMD ["streamlit", "run", "app.py"]
 
 # Build Command:
 # -----------------------------
-# docker build -t rahula004/tazmic-research-assistant .
+# docker build -t rahula004/rag-research-assistant .
 #
 # Run Command:
 # -----------------------------
 # For Windows PowerShell:
-# docker run -it -p 8501:8501 -e AZURE_OPENAI_ENDPOINT="<AZURE_OPENAI_ENDPOINT>" -e AZURE_OPENAI_API_KEY="<AZURE_OPENAI_API_KEY>" -e AZURE_OPENAI_API_VERSION="2024-12-01-preview" -e AZURE_OPENAI_LLM_DEPLOYMENT="gpt-4o" -e AZURE_OPENAI_EMBEDDING_DEPLOYMENT="text-embedding-3-small" -e FIRECRAWL_API_KEY="<FIRECRAWL_API_KEY>" -v "${PWD}/artifacts:/app/artifacts" rahula004/tazmic-research-assistant
+# docker run -it -p 8501:8501 -e AZURE_OPENAI_ENDPOINT="<AZURE_OPENAI_ENDPOINT>" -e AZURE_OPENAI_API_KEY="<AZURE_OPENAI_API_KEY>" -e AZURE_OPENAI_API_VERSION="2024-12-01-preview" -e AZURE_OPENAI_LLM_DEPLOYMENT="gpt-4o" -e AZURE_OPENAI_EMBEDDING_DEPLOYMENT="text-embedding-3-small" -e FIRECRAWL_API_KEY="<FIRECRAWL_API_KEY>" rahula004/rag-research-assistant

@@ -17,7 +17,7 @@ memory = MemorySaver()
 vectorstore = Chroma(
     collection_name="biology",
     embedding_function=embedding_model,
-    persist_directory=r"artifacts\Vector_databases\biology",
+    persist_directory="artifacts/Vector_databases/biology",
 )
 retriever = vectorstore.as_retriever(
     search_type="similarity",
