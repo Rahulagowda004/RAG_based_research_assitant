@@ -1,8 +1,20 @@
-# TAZMIC 🔬
+# RAG based research_assitant 🔬
 
 **T**ransformer **A**nalysis and **Z**ero-shot **M**ulti-modal **I**ntelligence **C**hat
 
 A sophisticated RAG (Retrieval-Augmented Generation) research assistant powered by Azure OpenAI and LangGraph that specializes in analyzing and answering questions about research papers, particularly focusing on transformer circuits and large language model biology.
+
+🌐 **Docker Image:**
+1. **Pull Image:**
+   ```bash
+   # To pull directly from docker
+   docker pull rahula004/rag-research-assistant:latest
+   ```
+2. **Run Image:**
+   ```bash
+   # To pull directly from docker
+   docker run -it -p 8501:8501 -e AZURE_OPENAI_ENDPOINT="<AZURE_OPENAI_ENDPOINT>" -e AZURE_OPENAI_API_KEY="<AZURE_OPENAI_API_KEY>" -e AZURE_OPENAI_API_VERSION="2024-12-01-preview" -e AZURE_OPENAI_LLM_DEPLOYMENT="gpt-4o" -e AZURE_OPENAI_EMBEDDING_DEPLOYMENT="text-embedding-3-small" -e FIRECRAWL_API_KEY="<FIRECRAWL_API_KEY>" rahula004/rag-research-assistant
+   ```
 
 ## 🌟 Features
 
