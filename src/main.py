@@ -59,7 +59,7 @@ def should_continue(state: AgentState):
     return hasattr(result, 'tool_calls') and len(result.tool_calls) > 0
 
 system_prompt = """
-you are a research assistant specialized in providing information from a document,
+you are a research assistant specialized in providing information from a document, and provide concise and accurate answers to user queries based on the content of the document.
 """
 
 tools_dict = {our_tool.name: our_tool for our_tool in tools}
@@ -111,7 +111,31 @@ rag_agent = graph.compile(checkpointer=memory)
 
 config = {"configurable": {"thread_id": "1"}}
 
+def query_agent(user_input: str) -> str:
+    """
+    Process a single user query and return the response.
+    """
+    messages = [HumanMessage(content=user_input)]
+    
+    events = rag_agent.stream(
+        {"messages": messages},
+        config,
+        stream_mode="values",
+    )
+    
+    final_response = ""
+    for event in events:
+        last_message = event["messages"][-1]
+        if hasattr(last_message, 'content') and hasattr(last_message, 'type'):
+            if last_message.type == "ai":
+                final_response = last_message.content
+    
+    return final_response
+
 def running_agent():
+    """
+    Console version of the agent for testing.
+    """
     print("\n=== RAG AGENT===")
     
     while True:
@@ -119,19 +143,9 @@ def running_agent():
         if user_input.lower() in ['exit', 'quit']:
             break
             
-        messages = [HumanMessage(content=user_input)]
+        response = query_agent(user_input)
+        print(f"\nAssistant: {response}")
 
-        events = rag_agent.stream(
-            {"messages": messages},
-            config,
-            stream_mode="values",
-        )
-        for event in events:
-            # Check if the last message has pretty_print method
-            last_message = event["messages"][-1]
-            if hasattr(last_message, 'pretty_print'):
-                last_message.pretty_print()
-            else:
-                print(f"Message: {last_message}")
-            
-running_agent()
+# Only run the console version if this file is executed directly
+if __name__ == "__main__":
+    running_agent()
