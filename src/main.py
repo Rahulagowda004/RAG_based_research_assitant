@@ -14,19 +14,15 @@ load_dotenv()
 
 memory = MemorySaver()
 
-if os.path.exists(r"R:\TAZMIC\artifacts\Vector_databases\biology"):
-    vectorstore = Chroma(
-        collection_name="biology",
-        embedding_function=embedding_model,
-        persist_directory=r"R:\TAZMIC\artifacts\Vector_databases\biology",
-    )
-    retriever = vectorstore.as_retriever(
-        search_type="similarity",
-        search_kwargs={"k": 20}
-    )
-else:
-    pass
-    retriever = retriever(markdown_path=r"R:\TAZMIC\artifacts\research_papers\biology\content.md",directory=r"artifacts\Vector_databases\biology",collection_name="biology")
+vectorstore = Chroma(
+    collection_name="biology",
+    embedding_function=embedding_model,
+    persist_directory=r"artifacts\Vector_databases\biology",
+)
+retriever = vectorstore.as_retriever(
+    search_type="similarity",
+    search_kwargs={"k": 20}
+)
     
 @tool
 def retriever_tool(query: str) -> str:
