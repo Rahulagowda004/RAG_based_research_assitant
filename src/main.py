@@ -1,4 +1,3 @@
-from logging import logger
 from dotenv import load_dotenv
 from langgraph.graph import StateGraph, END
 from typing import TypedDict, Annotated, Sequence
@@ -15,11 +14,11 @@ load_dotenv()
 
 memory = MemorySaver()
 
-if os.path.exists("artifacts/Vector_databases/biology"):
+if os.path.exists(r"R:\TAZMIC\artifacts\Vector_databases\biology"):
     vectorstore = Chroma(
         collection_name="biology",
         embedding_function=embedding_model,
-        persist_directory="artifacts/Vector_databases/biology",
+        persist_directory=r"R:\TAZMIC\artifacts\Vector_databases\biology",
     )
     retriever = vectorstore.as_retriever(
         search_type="similarity",
@@ -120,14 +119,19 @@ def running_agent():
         if user_input.lower() in ['exit', 'quit']:
             break
             
-        messages = [HumanMessage(content=user_input)] # converts back to a HumanMessage type
+        messages = [HumanMessage(content=user_input)]
 
-        events = graph.stream(
-            {"messages": [{"role": "user", "content": user_input}]},
+        events = rag_agent.stream(
+            {"messages": messages},
             config,
             stream_mode="values",
         )
         for event in events:
-            event["messages"][-1].pretty_print()
+            # Check if the last message has pretty_print method
+            last_message = event["messages"][-1]
+            if hasattr(last_message, 'pretty_print'):
+                last_message.pretty_print()
+            else:
+                print(f"Message: {last_message}")
             
 running_agent()
