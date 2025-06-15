@@ -30,7 +30,7 @@ A sophisticated RAG (Retrieval-Augmented Generation) research assistant powered 
 
 ### System Workflow
 
-![TAZMIC Workflow](pictures/workflow.png)
+![RAG_based_research_assitant Workflow](pictures/workflow.png)
 
 _Complete workflow diagram showing the end-to-end process from document ingestion to query response_
 
@@ -38,21 +38,21 @@ _Complete workflow diagram showing the end-to-end process from document ingestio
 
 ### Main Dashboard
 
-![TAZMIC Homepage](pictures/homepage.png)
+![RAG_based_research_assitant Homepage](pictures/homepage.png)
 
 _Clean, intuitive interface featuring the research assistant with organized capabilities and intelligent chat system_
 
 ### Interactive Querying System
 
-![TAZMIC Querying Interface](pictures/querying.png)
+![RAG_based_research_assitant Querying Interface](pictures/querying.png)
 
 _Natural conversation interface demonstrating real-time research analysis and context-aware responses_
 
 ### Memory Retention & Context Management
 
-![TAZMIC Memory Test](pictures/memory_retention_test.png)
+![RAG_based_research_assitant Memory Test](pictures/memory_retention_test.png)
 
-_Advanced conversation flow showing TAZMIC's ability to maintain context and reference previous interactions_
+_Advanced conversation flow showing RAG_based_research_assitant's ability to maintain context and reference previous interactions_
 
 ### Key Interface Features
 
@@ -67,7 +67,7 @@ _Advanced conversation flow showing TAZMIC's ability to maintain context and ref
 
 ## 🎯 Live Demo Capabilities
 
-The screenshots above demonstrate TAZMIC's ability to:
+The screenshots above demonstrate RAG_based_research_assitant's ability to:
 
 1. **Complex Research Analysis** - Breaking down intricate AI concepts like transformer circuits into understandable explanations
 2. **Contextual Memory** - Remembering previous questions and maintaining conversation flow
@@ -78,7 +78,7 @@ The screenshots above demonstrate TAZMIC's ability to:
 ### Project Structure
 
 ```
-TAZMIC/
+RAG_based_research_assitant/
 ├── app.py                 # Streamlit web interface
 ├── src/
 │   ├── main.py           # Main RAG agent implementation
@@ -275,4 +275,4 @@ For questions, issues, or contributions, please:
 
 ---
 
-**TAZMIC** - Transforming how we interact with AI research literature through intelligent retrieval and analysis.
+**RAG_based_research_assitant** - Transforming how we interact with AI research literature through intelligent retrieval and analysis.
