@@ -22,6 +22,47 @@ A sophisticated RAG (Retrieval-Augmented Generation) research assistant powered 
 
 _Complete workflow diagram showing the end-to-end process from document ingestion to query response_
 
+## 🖥️ User Interface Showcase
+
+### Main Dashboard
+
+![TAZMIC Homepage](pictures/homepage.png)
+
+_Clean, intuitive interface featuring the research assistant with organized capabilities and intelligent chat system_
+
+### Interactive Querying System
+
+![TAZMIC Querying Interface](pictures/querying.png)
+
+_Natural conversation interface demonstrating real-time research analysis and context-aware responses_
+
+### Memory Retention & Context Management
+
+![TAZMIC Memory Test](pictures/memory_retention_test.png)
+
+_Advanced conversation flow showing TAZMIC's ability to maintain context and reference previous interactions_
+
+### Key Interface Features
+
+- **📊 Dynamic Stats Cards** - Real-time information about document sources and AI models
+- **🎯 Capability Overview** - Clear presentation of research analysis features
+- **💬 Intelligent Chat** - Context-aware conversations with research documents
+- **🔍 Smart Responses** - Detailed, well-structured answers with proper citations
+- **📚 Example Guidance** - Built-in suggestions to help users ask better questions
+- **🧠 Context Retention** - Maintains conversation history and can reference previous queries
+- **🔬 Research Analysis** - Deep analysis of transformer circuits and neural network mechanisms
+- **🌐 Multi-modal Understanding** - Processes both text and visual content from research papers
+
+## 🎯 Live Demo Capabilities
+
+The screenshots above demonstrate TAZMIC's ability to:
+
+1. **Complex Research Analysis** - Breaking down intricate AI concepts like transformer circuits into understandable explanations
+2. **Contextual Memory** - Remembering previous questions and maintaining conversation flow
+3. **Detailed Responses** - Providing comprehensive answers with proper structure and citations
+4. **User-Friendly Interface** - Combining powerful AI capabilities with an intuitive, accessible design
+5. **Real-time Processing** - Quick response times for complex research queries
+
 ### Project Structure
 
 ```
