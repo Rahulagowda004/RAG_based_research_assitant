@@ -111,7 +111,7 @@ TAZMIC/
 
    ```bash
    git clone https://github.com/Rahulagowda004/RAG_based_research_assitant.git
-   cd TAZMIC
+   cd RAG_based_research_assitant
    ```
 
 2. **Install dependencies**
