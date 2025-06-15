@@ -77,22 +77,29 @@ def call_llm(state: AgentState) -> AgentState:
 # Retriever Agent
 def take_action(state: AgentState) -> AgentState:
     """Execute tool calls from the LLM's response."""
-
+    
     tool_calls = state['messages'][-1].tool_calls
     results = []
+    
     for t in tool_calls:
         print(f"Calling Tool: {t['name']} with query: {t['args'].get('query', 'No query provided')}")
         
-        if not t['name'] in tools_dict: # Checks if a valid tool is present
-            print(f"\nTool: {t['name']} does not exist.")
-            result = "Incorrect Tool Name, Please Retry and Select tool from List of Available tools."
-        
-        else:
-            result = tools_dict[t['name']].invoke(t['args'].get('query', ''))
-            print(f"Result length: {len(str(result))}")
+        try:
+            if t['name'] not in tools_dict:
+                print(f"\nTool: {t['name']} does not exist.")
+                result = "Incorrect Tool Name, Please Retry and Select tool from List of Available tools."
+            else:
+                result = tools_dict[t['name']].invoke(t['args'].get('query', ''))
+                print(f"Result length: {len(str(result))}")
+                
+            # Always append the Tool Message with proper ID
+            results.append(ToolMessage(tool_call_id=t['id'], name=t['name'], content=str(result)))
             
-        # Appends the Tool Message
-        results.append(ToolMessage(tool_call_id=t['id'], name=t['name'], content=str(result)))
+        except Exception as e:
+            print(f"Error in tool execution: {e}")
+            # Even on error, we must respond to the tool call
+            error_result = f"Tool execution failed: {str(e)}"
+            results.append(ToolMessage(tool_call_id=t['id'], name=t['name'], content=error_result))
 
     print("Tools Execution Complete. Back to the model!")
     return {'messages': results}

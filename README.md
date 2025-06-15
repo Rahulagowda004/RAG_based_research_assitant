@@ -16,6 +16,14 @@ A sophisticated RAG (Retrieval-Augmented Generation) research assistant powered 
 
 ## 🏗️ Architecture
 
+### System Workflow
+
+![TAZMIC Workflow](pictures/workflow.png)
+
+_Complete workflow diagram showing the end-to-end process from document ingestion to query response_
+
+### Project Structure
+
 ```
 TAZMIC/
 ├── app.py                 # Streamlit web interface
@@ -31,6 +39,8 @@ TAZMIC/
 ├── artifacts/
 │   ├── research_papers/  # Scraped content storage
 │   └── Vector_databases/ # ChromaDB vector stores
+├── pictures/
+│   └── workflow.png      # System workflow diagram
 └── requirements files
 ```
 
