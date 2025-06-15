@@ -110,7 +110,7 @@ TAZMIC/
 1. **Clone the repository**
 
    ```bash
-   git clone <repository-url>
+   git clone https://github.com/Rahulagowda004/RAG_based_research_assitant.git
    cd TAZMIC
    ```
 
