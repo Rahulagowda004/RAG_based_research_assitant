@@ -14,10 +14,17 @@ load_dotenv()
 
 memory = MemorySaver()
 
+# Determine the correct path for vector database
+import os
+if os.path.exists("/app/artifacts/Vector_databases/biology"):
+    persist_directory = "/app/artifacts/Vector_databases/biology"
+else:
+    persist_directory = "artifacts/Vector_databases/biology"
+
 vectorstore = Chroma(
     collection_name="biology",
     embedding_function=embedding_model,
-    persist_directory="artifacts/Vector_databases/biology",
+    persist_directory=persist_directory,
 )
 retriever = vectorstore.as_retriever(
     search_type="similarity",
